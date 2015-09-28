@@ -23,8 +23,8 @@ class SheetsController < ApplicationController
       if sheet.original_filename[/xls$/]
         if libreoffice_available?
           system "libreoffice --headless --convert-to xlsx #{sheet.tempfile.path} --outdir tmp"
-          path = sheet.tempfile.path[0..-4] + ".xlsx"
-          File.rename(path[0..-1], path)
+          path = sheet.tempfile.path[0..-5] + ".xlsx"
+          File.rename(path[0..-2], path)
         else
           flash[:error] = "Can't import MS Excel files without headless LibreOffice."
         end
