@@ -36,28 +36,7 @@ class SheetsController < ApplicationController
     end
 
     if x
-      sheets = []
-      x.sheets.each_with_index do |xsheet,xno|
-        sheet = Sheet.new(name: xsheet.name, no_logging: true)
-        sheets << sheet
-
-        xrows = x[xno].sheet_data.rows
-
-        sheet.row_count     = xrows.size
-        sheet.column_count  = xrows.map(&:cells).map(&:size).sort.last
-        sheet.save
-
-        xrows.map(&:cells).each_with_index do |xrow,row|
-          xrow.each_with_index do |cell,col|
-            val = cell.value rescue nil
-            unless val.blank?
-              cell = sheet[row][col]
-              cell.content = val
-              cell.save
-            end
-          end
-        end
-      end
+      ImportSheetsFromExcel.new(x).enqueue
       redirect_to sheets_path, notice: "Sheets created: " + sheets.map(&:name).join(", ")
     else
       @sheet = Sheet.new(sheet_params)

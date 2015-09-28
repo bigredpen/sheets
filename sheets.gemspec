@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.2"
   s.add_dependency "rubyXL", "~> 3.3"
   s.add_dependency "best_in_place", "~> 3.0"
+  s.add_dependency "resque", "~> 1.25"
+  s.add_dependency "resque-scheduler", "~> 4.0"
 
   s.add_development_dependency "sqlite3"
 end
