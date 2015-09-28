@@ -1,6 +1,10 @@
+require 'pusher'
 require 'RubyXL'
+
 class ImportSheetsFromExcel < ActiveJob::Base
   queue_as :import_sheets_from_excel
+  
+  after_perform :notify_ui_manager
   
   def perform(path)
     x = RubyXL::Parser.parse(path) if path
@@ -29,8 +33,15 @@ class ImportSheetsFromExcel < ActiveJob::Base
     end
     
   rescue Resque::TermException
-      sleep(2)
-      puts "ERROR - Job cleanup!!!!"
-    end
+    sleep(2)
+    puts "ERROR - Job cleanup!!!!"
+  end
+  
+  private
+  def notify_ui_manager
+    Pusher.trigger('test_channel', 'my_event', {
+      message: 'hello world'
+    })
+  end
     
 end
