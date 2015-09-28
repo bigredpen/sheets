@@ -6,7 +6,7 @@
   ],
   "description": "Sheets rails engine",
   "license": "MIT",
-  "homepage": "http://github.com/ringe/sheets/",
+  "homepage": "http://github.com/bigredpen/sheets/",
   "private": true,
   "ignore": [
     "**/.*",
