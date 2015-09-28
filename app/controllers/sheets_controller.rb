@@ -31,6 +31,7 @@ class SheetsController < ApplicationController
       if sheet.original_filename[/xlsx$/]
         path = sheet.tempfile.path
       end
+      raise path
       x = RubyXL::Parser.parse(path) if path
     end
 
