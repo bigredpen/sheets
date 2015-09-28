@@ -34,6 +34,7 @@
       rowHeaders: <%= @sheet.row_headers %>,
       colHeaders: <%= @sheet.column_headers %>,
       contextMenu: true,
+      formulas: true,
 //      columns: <%# @sheet.columns.to_json.html_safe %>,
       afterChange: function (change, source) {
           if (source === 'loadData') {
