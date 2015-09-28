@@ -1,8 +1,9 @@
 {
   "name": "sheets",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "authors": [
-    "Runar Ingebrigtsen <runar@voit.no>"
+    "Runar Ingebrigtsen <runar@voit.no>",
+    "Marc Colando <marc@bigredpen.com>"
   ],
   "description": "Sheets rails engine",
   "license": "MIT",
