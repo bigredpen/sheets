@@ -63,23 +63,23 @@
       },
       afterRemoveRow: function (position, count) {
         <%= send_change(@sheet, "change: 'drop_row', at: position, count: count") %>
-      },
-
-      afterOnCellMouseDown: function (event, coords, td) {
-        if (coords.row == -1) {
-          console.log(event, coords, td);
-          col = coords.col;
-
-          <%= get_column(@sheet.id, "col") %>
-
-          $('#myModal').reveal({
-               animation: 'fadeAndPop',                   //fade, fadeAndPop, none
-               animationspeed: 300,                       //how fast animtions are
-               closeonbackgroundclick: true,              //if you click background will modal close?
-               dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
-          });
-        }
       }
+
+      //afterOnCellMouseDown: function (event, coords, td) {
+        //if (coords.row == -1) {
+          //console.log(event, coords, td);
+          //col = coords.col;
+
+          <%= #get_column(@sheet.id, "col") %>
+
+          //$('#myModal').reveal({
+          //     animation: 'fadeAndPop',                   //fade, fadeAndPop, none
+          //     animationspeed: 300,                       //how fast animtions are
+          //     closeonbackgroundclick: true,              //if you click background will modal close?
+          //     dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
+          //});
+        //}
+      //}
     });
 
     var onlyExactMatch = function (queryStr, value) {
