@@ -1,3 +1,4 @@
+require 'RubyXL'
 class ImportSheetsFromExcel < ActiveJob::Base
   queue_as :seed_job_listings
   
