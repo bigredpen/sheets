@@ -1,5 +1,5 @@
 require 'RubyXL'
-class Sheets::ImportSheetsFromExcel < ActiveJob::Base
+class ImportSheetsFromExcel < ActiveJob::Base
   queue_as :import_sheets_from_excel
   
   def perform(path)
