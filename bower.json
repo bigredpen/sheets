@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "jquery": "~2.1",
-    "handsontable": "~0.12",
+    "handsontable": "~0.18",
     "numeraljs": "git://github.com/ringe/Numeral-js.git",
     "handsontable-excel": "git://github.com/gurubenka/handsontable-excel.git",
     "vd42-reveal": "~1.0"
