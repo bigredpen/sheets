@@ -1,3 +1,4 @@
+require 'RubyXL'
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
 
