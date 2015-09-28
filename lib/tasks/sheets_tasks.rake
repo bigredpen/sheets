@@ -21,14 +21,14 @@ namespace :sheets do
 
     # insert javascript requirements once, before the require tree line
     f.each do |line|
-      h = true if line=~/handsontable.dist.handsontable/
+      h = true if line=~/handsontable.dist.handsontable.full/
       n = true if line=~/numeraljs.numeral/
       l = true if line=~/numeraljs.languages/
       b = true if line=~/best_in_place/
       r = true if line=~/reveal/
 
       if line=~/require_tree/
-        tempfile<<"//= require handsontable/dist/handsontable\n" unless h
+        tempfile<<"//= require handsontable/dist/handsontable.full\n" unless h
         tempfile<<"//= require numeraljs/numeral\n" unless n
         tempfile<<"//= require numeraljs/languages\n" unless l
         tempfile<<"//= require best_in_place\n" unless b
