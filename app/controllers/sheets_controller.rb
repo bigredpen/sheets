@@ -20,11 +20,10 @@ class SheetsController < ApplicationController
     params[:sheet].delete("sheet")
 
     if sheet
-      if sheet.original_filename[/xls$/]
+      if sheet.original_filename[/\.xls$/]
         if libreoffice_available?
-          system "libreoffice --headless --convert-to xlsx #{sheet.tempfile.path} --outdir tmp"
-          path = sheet.tempfile.path[0..-5] + ".xlsx"
-          File.rename(path[0..-2], path)
+          path = sheet.tempfile.path.gsub(/\.xls$/i, '.xlsx')
+          system "libreoffice --headless --convert-to xlsx #{sheet.tempfile.path} --outdir #{File.dirname(path)}"
         else
           flash[:error] = "Can't import MS Excel files without headless LibreOffice."
         end
