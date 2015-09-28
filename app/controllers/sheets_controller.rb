@@ -1,4 +1,3 @@
-require 'RubyXL'
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
 
@@ -32,12 +31,11 @@ class SheetsController < ApplicationController
         path = sheet.tempfile.path
       end
       #raise path
-      x = RubyXL::Parser.parse(path) if path
+      ImportSheetsFromExcel.new(path).enqueue
     end
 
-    if x
-      ImportSheetsFromExcel.new(x).enqueue
-      redirect_to sheets_path, notice: "Sheets created: " + sheets.map(&:name).join(", ")
+    if path
+      redirect_to sheets_path, notice: "Started import: " + sheets.map(&:name).join(", ")
     else
       @sheet = Sheet.new(sheet_params)
       if @sheet.save

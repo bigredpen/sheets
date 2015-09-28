@@ -1,8 +1,10 @@
 require 'RubyXL'
 class ImportSheetsFromExcel < ActiveJob::Base
-  queue_as :seed_job_listings
+  queue_as :import_sheets_from_excel
   
-  def perform(x)
+  def perform(path)
+    x = RubyXL::Parser.parse(path) if path
+    
     sheets = []
     x.sheets.each_with_index do |xsheet,xno|
       sheet = Sheet.new(name: xsheet.name, no_logging: true)
