@@ -35,7 +35,7 @@ class SheetsController < ApplicationController
     end
 
     if path
-      redirect_to sheets_path, notice: "Started import: " + sheets.map(&:name).join(", ")
+      redirect_to sheets_path, notice: "Started import. Sheet(s) will be available shortly."
     else
       @sheet = Sheet.new(sheet_params)
       if @sheet.save
