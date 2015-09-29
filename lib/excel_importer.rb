@@ -1,20 +1,17 @@
-require 'pusher'
 require 'RubyXL'
 
-class ImportSheetsFromExcel < ActiveJob::Base
-  queue_as :import_sheets_from_excel
-  
-  after_perform do |job|
-      Pusher.trigger('import_sheets_from_excel', 'after_perform', {
-        type: "success",
-        message: "Finished importing Excel spreadsheet"
-      })
+class ExcelImporter
+  attr_reader   :path
+  attr_accessor :sheets
+
+  def initialize(path)
+    @path = path
+    @sheets = []
   end
-  
-  def perform(path)
+
+  def run
     x = RubyXL::Parser.parse(path) if path
     
-    sheets = []
     x.sheets.each_with_index do |xsheet,xno|
       sheet = Sheet.new(name: xsheet.name, no_logging: true)
       sheets << sheet
@@ -36,10 +33,5 @@ class ImportSheetsFromExcel < ActiveJob::Base
         end
       end
     end
-    
-  rescue Resque::TermException
-    sleep(2)
-    puts "ERROR - Job cleanup!!!!"
   end
-    
 end
