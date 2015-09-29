@@ -5,9 +5,9 @@ class ExcelImportJob < ActiveJob::Base
   
   after_perform :notify_manager
   
-  rescue_from(StandardError) do |exception|
-    notify_failed_job_to_manager(exception)
-  end
+  #rescue_from(StandardError) do |exception|
+  #  notify_failed_job_to_manager(exception)
+  #end
   
   attr_accessor :job
   
