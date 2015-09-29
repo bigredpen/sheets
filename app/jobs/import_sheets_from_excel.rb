@@ -5,11 +5,11 @@ class ImportSheetsFromExcel < ActiveJob::Base
   queue_as :import_sheets_from_excel
   
   after_perform do |job|
-    if Pusher
+    #if Pusher
       Pusher.trigger('import_sheets_from_excel', 'after_perform', {
-        message: 'hello world'
+        message: "Finished importing #{File.basename(job.arguments.first)}"
       })
-    end
+    #end
   end
   
   def perform(path)
