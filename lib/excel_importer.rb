@@ -1,4 +1,5 @@
 module ExcelImporter
+  
   class ExcelImporter
     attr_reader   :path
     attr_accessor :sheets
@@ -34,4 +35,5 @@ module ExcelImporter
       end
     end
   end
+  
 end
