@@ -12,7 +12,7 @@ class ExcelImportJob < ActiveJob::Base
   attr_accessor :job
   
   def perform(filepath)
-    @job = ExcelImporter.new(filepath).run
+    job = ExcelImporter.new(filepath).run
   end
   
   private
@@ -29,8 +29,11 @@ class ExcelImportJob < ActiveJob::Base
    end
    
    def notify_failed_job_to_manager(exception)
-     @job.sheets.each {|sheet| sheet.destroy }
-     #NotificationMailer.job_failed(User.find_manager, exception).deliver_later
+     begin
+       job.sheets.each {|sheet| sheet.destroy }
+     rescue
+       #NotificationMailer.job_failed(User.find_manager, exception).deliver_later
+     end
    end
     
 end
