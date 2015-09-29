@@ -1,5 +1,3 @@
-require 'pusher'
-
 class ExcelImportJob < ActiveJob::Base
   queue_as do
     (urgent_job?) ? :high_priority : :default
@@ -11,11 +9,9 @@ class ExcelImportJob < ActiveJob::Base
     notify_failed_job_to_manager(exception)
   end
   
-  attr_accessor :job
-  
   
   def perform(filepath)
-    @job = ExcelImporter.new(filepath).run
+    ExcelImporter.new(filepath).run
   end
   
   private

@@ -1,5 +1,3 @@
-require 'RubyXL'
-
 class ExcelImporter
   attr_reader   :path
   attr_accessor :sheets
