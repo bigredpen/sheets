@@ -9,9 +9,10 @@ class ExcelImportJob < ActiveJob::Base
     notify_failed_job_to_manager(exception)
   end
   
+  attr_accessor :job
   
   def perform(filepath)
-    ExcelImporter.new(filepath).run
+    @job = ExcelImporter.new(filepath).run
   end
   
   private
