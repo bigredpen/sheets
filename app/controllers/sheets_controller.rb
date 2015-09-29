@@ -31,7 +31,7 @@ class SheetsController < ApplicationController
         path = sheet.tempfile.path
       end
       #raise path
-      ImportSheetsFromExcel.new(path).enqueue
+      ExcelImportJob.perform_later(path)
     end
 
     if path
