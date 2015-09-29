@@ -8,7 +8,7 @@ class ImportSheetsFromExcel < ActiveJob::Base
       Pusher.trigger('import_sheets_from_excel', 'after_perform', {
         type: "success",
         message: "Finished importing Excel spreadsheet"
-      }) rescue nil
+      })
   end
   
   def perform(path)
