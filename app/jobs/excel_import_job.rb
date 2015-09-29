@@ -1,4 +1,6 @@
 class ExcelImportJob < ActiveJob::Base
+  attr_accessor :job
+    
   queue_as do
     (urgent_job?) ? :high_priority : :default
   end
@@ -8,8 +10,7 @@ class ExcelImportJob < ActiveJob::Base
   #rescue_from(StandardError) do |exception|
   #  notify_failed_job_to_manager(exception)
   #end
-  
-  attr_accessor :job
+
   
   def perform(filepath)
     job = ExcelImporter.new(filepath).run
@@ -22,7 +23,7 @@ class ExcelImportJob < ActiveJob::Base
   end
   
   def notify_manager
-    Pusher.trigger(self.name.underscore.to_sym, 'after_perform', {
+    Pusher.trigger(self.class.name.underscore.to_sym, 'after_perform', {
       type: "success",
       message: "Finished importing Excel spreadsheet"
     })
