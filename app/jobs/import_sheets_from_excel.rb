@@ -7,7 +7,7 @@ class ImportSheetsFromExcel < ActiveJob::Base
   after_perform do |job|
     if Pusher
       Pusher.trigger('import_sheets_from_excel', 'after_perform', {
-        message: "Finished importing #{File.basename(job.arguments.first)}"
+        message: "Finished importing Excel spreadsheet"
       })
     end
   end
