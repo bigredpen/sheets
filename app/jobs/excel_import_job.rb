@@ -1,7 +1,9 @@
 require 'pusher'
 
 class ExcelImportJob < ActiveJob::Base
-  queue_as (urgent_job?) ? :high_priority : :default
+  queue_as do
+    (urgent_job?) ? :high_priority : :default
+  end
   
   after_perform :notify_manager
   
