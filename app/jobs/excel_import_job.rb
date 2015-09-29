@@ -31,6 +31,10 @@ class ExcelImportJob < ActiveJob::Base
    
    def notify_failed_job(exception)
      begin
+       Pusher.trigger(self.class.name.underscore.to_sym, 'after_perform', {
+         type: "warning",
+         message: "The Excel spreadsheet could not be imported"
+       })
        job.sheets.each {|sheet| sheet.destroy }
      rescue
        #NotificationMailer.job_failed(User.find_manager, exception).deliver_later
