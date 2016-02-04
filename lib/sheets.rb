@@ -2,7 +2,7 @@ module Sheets
   
   if defined?(Rails)
     require 'pusher'
-    require 'RubyXL'
+    require 'rubyXL'
     require "sheets/engine"
     require "sheets/content_type_validator"
   end
